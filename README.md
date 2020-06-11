@@ -6,94 +6,6 @@ Close out strong
 
 ![](viz/mortal_kombat.gif)
 
-# Table of Contents
-
-## Hypothesis testing examples
-
-- null vs alternative hypo
-- one-tailed vs two-tailed
-- alpha
-- error
-  - Type I
-  - Type II
-
-## Sampling
-
-- why we sample
-- statistics vs parameters
-- mean, stderr
-- CLT
-
-## Confidence Intervals
-
-- calculation
-- interpretation
-- examples
-
-## Types of tests
-
-- Z-score
-  - assumptions
-  - one-sided 
-  - two-sided
-  - examples
-  
-  
-- t-test
-  - one sample 
-  - two sample
-  - one-sided
-  - two-sided
-  - assumptions
-  - examples
-
-## Power
-
-- effect size
-  - def 
-  - calculation
-  - why useful
-  
-  
-- power
-  - def
-  - calculation
-  - why useful
-  
-  
-- what affects?
-  - effect size
-  - sample size
-  - alpha
-  
-  
-- altering power
-
-### Hypothesis Testing Examples
-
-
-
-When we approach answering a question with statistical significance tests, we have to start by defining what our tests will show.  
-
-We do this for a couple reasons:
-
-- rigorously defining hypotheses means we know what we're demonstrating, and what we're not, with a statistical test
-
-- helps us pick the right test
-
-
-#### Null hypothesis
-First we define what it means if our test does not return a significant difference with the **null hypothesis**.
-
-This is, generally, that there is no significant difference between the two statistics being compared
-
-When tests are run, we can find one of the following things: 
-- evidence indicating we should **accept the null hypothesis**
-- evidence indicating we should **reject the null hypothesis**
-
-#### Alternative hypothesis
-In the event we find evidence 
-
 ### Examples
 
 For each of the questions below:
@@ -136,37 +48,6 @@ Did this SAT prep class result in a significantly greater mean of scores than av
 
 ```
 
-
-```python
-from scipy import stats
-import numpy as np
-
-data = '434 694 457 534 720 400 484 478 610 641 425 636 454 514 563 370 499 640 501 625 612 471 598 509 531'
-
-def parse_data(data_to_parse, splits=' '):
-    parsed = [float(val) for val in data_to_parse.split(splits)]
-    return parsed
-
-data = parse_data(data)
-
-mean = np.mean(data)
-std = np.std(data)
-
-denom = 100/np.sqrt(len(data))
-
-z = (mean - 500)/denom
-print(z)
-print(f'from z-table, z-score of 1.8 has distribution at or below of .9641')
-print(stats.norm.cdf(z))
-print(stats.norm.sf(z)) 
-```
-
-    1.8
-    from z-table, z-score of 1.8 has distribution at or below of .9641
-    0.9640696808870742
-    0.03593031911292579
-
-
 ### Example: T-test
 
 #### T-test question 1
@@ -181,21 +62,8 @@ Are female doctor diastolic blood pressures significantly higher than the female
 
 
 ```python
-from scipy.stats import ttest_1samp
 
-data = '128 127 118 115 144 142 133 140 132 131 111 132 149 122 139 119 136 129 126 128'
-data = parse_data(data, splits = ' ')
-
-critical_tstat = stats.t.ppf(.95, 19)
-print(critical_tstat)
-print(ttest_1samp(data, 120))
-print(ttest_1samp(data, 120).pvalue/2)
 ```
-
-    1.729132811521367
-    Ttest_1sampResult(statistic=4.512403659336718, pvalue=0.00023838063630967753)
-    0.00011919031815483877
-
 
 #### T-test question 2
 
@@ -211,22 +79,8 @@ Is Elon Musk a dirty liar?
 
 
 ```python
-data = '30 28 32 26 33 25 28 30'
 
-data = parse_data(data)
-
-critical_tstat_below = stats.t.ppf(.025, 7)
-critical_tstat_above = stats.t.ppf(.975, 7)
-
-print(f'critical t_stat range: {critical_tstat_below}, {critical_tstat_above}')
-
-print(ttest_1samp(data, 31))
 ```
-
-    29.0
-    critical t_stat range: -2.3646242510103, 2.3646242510102993
-    Ttest_1sampResult(statistic=-2.0367003088692623, pvalue=0.0811068697473857)
-
 
 #### T-test question 3
 
@@ -248,27 +102,8 @@ Sample 2 data:
 
 
 ```python
-from scipy.stats import ttest_ind
 
-sample_1 = '19.7475 19.8387 12.6873 17.6973 19.0878 30.5562 14.5291 14.7627 14.3439 12.5745 11.0734 19.4998 18.3869 10.7374 18.0030 18.1730 18.8374 17.9287 15.3563 18.6004 11.7280 12.2898 21.0552 21.4184 25.5953'
-sample_2 = '17.4715 20.0386 12.6012 20.4401 22.4969 9.8613 19.6289 9.7741 15.1119 17.4448 23.4827 24.9357 19.9265 7.9955 17.6675 13.6029 17.8812 16.4178 5.1385 7.0984 18.1181 20.2681 14.7372 22.5915 16.7546'
-
-sample_1 = parse_data(sample_1)
-sample_2 = parse_data(sample_2)
-
-critical_tstat_below = stats.t.ppf(.95, 48)
-print(f'critical t_stat: {critical_tstat_below}')
-
-
-ttest_result = ttest_ind(sample_1, sample_2, equal_var = True)
-print(f'test t-stat: {ttest_result.statistic}')
-print(f'pvalue = {ttest_result.pvalue/2}')
 ```
-
-    critical t_stat: 1.6772241953450393
-    test t-stat: 0.655714294241895
-    pvalue = 0.25756938035286653
-
 
 ### T-test question 4
 
@@ -283,22 +118,8 @@ Is there a difference in rat weight between high- and low-protein diets after gi
 
 
 ```python
-rats_1 = parse_data('134 146 104 119 124 161 107 83 113 129 97 123')
-rats_2 = parse_data('70 118 101 85 107 132 94')
 
-critical_tstat_low = stats.t.ppf(.025, 17)
-critical_tstat_high = stats.t.ppf(.975, 17)
-print(f'critical t_stat range: {critical_tstat_low}, {critical_tstat_high}')
-
-ttest_result = ttest_ind(rats_1, rats_2, equal_var=True)
-print(f'test t-stat: {ttest_result.statistic}')
-print(f'pvalue = {ttest_result.pvalue}')
 ```
-
-    critical t_stat range: -2.109815577833181, 2.1098155778331806
-    test t-stat: 1.89143639744233
-    pvalue = 0.07573012895667763
-
 
 #### T-test question 5
 
@@ -324,17 +145,7 @@ Use those employees to provide evidence for the question: do junior employees in
 
 ```
 
-
-```python
-
-```
-
-
-```python
-
-```
-
-[Welsh's t, ie ttest_ind(equal_var=False, has some proseltyzors](https://onlinelibrary.wiley.com/doi/abs/10.1348/000711004849222)
+[Welsh's t, ie ttest_ind(equal_var=False), has some proseltyzors](https://onlinelibrary.wiley.com/doi/abs/10.1348/000711004849222)
 
 
 ```python
