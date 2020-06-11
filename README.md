@@ -6,7 +6,31 @@ Close out strong
 
 ![](viz/mortal_kombat.gif)
 
-### Examples
+### Hypothesis tests
+
+For each, write:
+
+- A null hypothesis 
+- An alternative hypothesis
+- Specify an alpha level
+- Specify what Type I error and Type II error would be (in English, without reference to the words `null`, `hypothesis`, or `alternative`
+
+We have a scores from a given classroom and want to know how they compare to the rest of the district.  We have all of the district's information.
+
+
+
+We have two samples of weights of fish from two adjacent lakes.  We want to know if Lake Winnetonka's fish are smaller than Lake Okachobee's.
+
+
+
+We want to know if Guns 'n Roses rocks harder than Aerosmith, and are taking as a proxy "noise levels = how hard a band rocks".  We sample dB levels from 40 years of concerts.  Slash is looking over our shoulder the whole time.  
+
+
+```python
+
+```
+
+### Calculation Examples
 
 For each of the questions below:
 
