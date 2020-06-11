@@ -6,94 +6,6 @@ Close out strong
 
 ![](viz/mortal_kombat.gif)
 
-# Table of Contents
-
-## Hypothesis testing examples
-
-- null vs alternative hypo
-- one-tailed vs two-tailed
-- alpha
-- error
-  - Type I
-  - Type II
-
-## Sampling
-
-- why we sample
-- statistics vs parameters
-- mean, stderr
-- CLT
-
-## Confidence Intervals
-
-- calculation
-- interpretation
-- examples
-
-## Types of tests
-
-- Z-score
-  - assumptions
-  - one-sided 
-  - two-sided
-  - examples
-  
-  
-- t-test
-  - one sample 
-  - two sample
-  - one-sided
-  - two-sided
-  - assumptions
-  - examples
-
-## Power
-
-- effect size
-  - def 
-  - calculation
-  - why useful
-  
-  
-- power
-  - def
-  - calculation
-  - why useful
-  
-  
-- what affects?
-  - effect size
-  - sample size
-  - alpha
-  
-  
-- altering power
-
-### Hypothesis Testing Examples
-
-
-
-When we approach answering a question with statistical significance tests, we have to start by defining what our tests will show.  
-
-We do this for a couple reasons:
-
-- rigorously defining hypotheses means we know what we're demonstrating, and what we're not, with a statistical test
-
-- helps us pick the right test
-
-
-#### Null hypothesis
-First we define what it means if our test does not return a significant difference with the **null hypothesis**.
-
-This is, generally, that there is no significant difference between the two statistics being compared
-
-When tests are run, we can find one of the following things: 
-- evidence indicating we should **accept the null hypothesis**
-- evidence indicating we should **reject the null hypothesis**
-
-#### Alternative hypothesis
-In the event we find evidence 
-
 ### Examples
 
 For each of the questions below:
@@ -138,6 +50,9 @@ Did this SAT prep class result in a significantly greater mean of scores than av
 
 
 ```python
+#__SOLUTION__
+
+
 from scipy import stats
 import numpy as np
 
@@ -181,6 +96,14 @@ Are female doctor diastolic blood pressures significantly higher than the female
 
 
 ```python
+
+```
+
+
+```python
+#__SOLUTION__
+
+
 from scipy.stats import ttest_1samp
 
 data = '128 127 118 115 144 142 133 140 132 131 111 132 149 122 139 119 136 129 126 128'
@@ -211,6 +134,14 @@ Is Elon Musk a dirty liar?
 
 
 ```python
+
+```
+
+
+```python
+#__SOLUTION__
+
+
 data = '30 28 32 26 33 25 28 30'
 
 data = parse_data(data)
@@ -248,6 +179,13 @@ Sample 2 data:
 
 
 ```python
+
+```
+
+
+```python
+#__SOLUTION__
+
 from scipy.stats import ttest_ind
 
 sample_1 = '19.7475 19.8387 12.6873 17.6973 19.0878 30.5562 14.5291 14.7627 14.3439 12.5745 11.0734 19.4998 18.3869 10.7374 18.0030 18.1730 18.8374 17.9287 15.3563 18.6004 11.7280 12.2898 21.0552 21.4184 25.5953'
@@ -283,6 +221,13 @@ Is there a difference in rat weight between high- and low-protein diets after gi
 
 
 ```python
+
+```
+
+
+```python
+#__SOLUTION__
+
 rats_1 = parse_data('134 146 104 119 124 161 107 83 113 129 97 123')
 rats_2 = parse_data('70 118 101 85 107 132 94')
 
@@ -388,17 +333,7 @@ print(f'pvalue = {ttest_result.pvalue}')
 
 
 
-
-```python
-
-```
-
-
-```python
-
-```
-
-[Welsh's t, ie ttest_ind(equal_var=False, has some proseltyzors](https://onlinelibrary.wiley.com/doi/abs/10.1348/000711004849222)
+[Welsh's t, ie ttest_ind(equal_var=False), has some proseltyzors](https://onlinelibrary.wiley.com/doi/abs/10.1348/000711004849222)
 
 
 ```python
